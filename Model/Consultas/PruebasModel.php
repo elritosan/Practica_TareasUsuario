@@ -40,6 +40,8 @@
                         <td><?php echo $x->correo ?></td>
                         <td><?php echo $x->clave ?></td>
                         <td><?php echo $x->tipo ?></td>
+                        <td><a href="../Model/Consultas/MEliminarUSUARIO.php?Id=<?php echo $x->idusuario ?>">Eliminar</a></td>
+                        <td><a href="../Model/Consultas/MEditarUSUARIO.php?Id=<?php echo $x->idusuario ?>">Actualizar</a></td>
                     </tr>
                 <?php
                 }
@@ -59,6 +61,8 @@
                     <tr>
                         <td><?php echo $x->idtarea ?></td>
                         <td><?php echo $x->titulo ?></td>
+                        <td><a href="../Model/Consultas/MEliminarTAREA.php?Id=<?php echo $x->idtarea ?>">Eliminar</a></td>
+                        <td><a href="../Model/Consultas/MEditarTAREA.php?Id=<?php echo $x->idtarea ?>">Actualizar</a></td>
                     </tr>
                 <?php
                 }
@@ -80,6 +84,8 @@
                         <td><?php echo $x->idencuesta ?></td>
                         <td><?php echo $x->descripcion ?></td>
                         <td><?php echo $Rotulos->RetornarRotulo_Tarea($x->idtarea) ?></td>
+                        <td><a href="../Model/Consultas/MEliminarENCUESTA.php?Id=<?php echo $x->idencuesta ?>">Eliminar</a></td>
+                        <td><a href="../Model/Consultas/MEditarENCUESTA.php?Id=<?php echo $x->idencuesta ?>">Actualizar</a></td>
                     </tr>
                 <?php
                 }
