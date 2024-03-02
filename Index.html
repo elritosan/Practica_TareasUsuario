@@ -1,19 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Panel del Usuario</title>
+        <link rel="stylesheet" href="Script/Styles/index.css">
+        <!-- Hoja de estilos para fuentes de iconos -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+        <!-- Hoja de estilos personalizada de Bootstrap -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+    </head>
 <body>
-    <main>
+
+<header>
+    <a href="#" class="logo"><img src="img/TAREAS.png" alt="Nombre de tu empresa" class="logo-img"></a>
+    <Center><h1>Tus tareas</h1></Center>
+    <nav class="navbar">
         <ul>
-            <li><a href="Controller/Controlador.php?Opcion=0">Consultas Entidades</a></li>
-            <li><a href="Controller/Controlador.php?Opcion=1">Insertar Usuario</a></li>
-            <li><a href="Controller/Controlador.php?Opcion=2">Insertar Tarea</a></li>
-            <li><a href="Controller/Controlador.php?Opcion=3">Insertar Encuesta</a></li>
-            <li><a href="Controller/Controlador.php?Opcion=4">Seleccionar Tarea</a></li>
+            <li><a href="Controller/Controlador.php?Opcion=1" class="btn btn-primary py-2 px-4 rounded-0">Iniciar sesión</a>
+            </li>
         </ul>
-    </main>
+    </nav>
+</header>
+
+<section id="imagenes">
+    <h2>Cumple tus Tareas :D </h2>
+    <img src="img/Fondo.jpeg" alt="Descripción de la imagen 1">
+ 
+</section>
 </body>
 </html>

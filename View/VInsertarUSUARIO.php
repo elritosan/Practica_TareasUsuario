@@ -9,10 +9,32 @@
     <title>Document</title>
 </head>
 <body>
-    <main>
-        <fieldset>
-            <legend>Insertar Usuario</legend>
-            <form action="../Model/Consultas/MInsertarUSUARIO.php" method="post">
+    <div id="login" class="login-form">   
+        <h1>Ingresar</h1>
+        
+        <form action="../Controller/Entidades/ControladorLogin.php" method="post">
+            <div class="field-wrap">
+                <label for="">Insertar nombre De Usuario</label>    
+                <input type="text" name="nombre"><br><br>
+            </div>
+        
+            <div class="field-wrap">
+             <label for="">Insertar clave De Usuario</label>
+                <input type="text" name="clave"><br><br>
+            </div>
+        
+            <input type="submit" class="button" value="Iniciar Sesión">
+        </form>
+
+        <div class="register-link">
+            <a href="#" class="button" id="register-link">Registrarse</a>
+        </div>
+    </div>
+     
+    <div id="signup" class="login-form" style="display: none;">   
+        <h1>Registrarse</h1>
+        
+        <form action="../Model/Consultas/MInsertarUSUARIO.php" method="post">
                 <label for="">Insertar nombre De Usuario</label>    
                 <input type="text" name="nombre"><br><br>
                 <label for="">Insertar correo De Usuario</label>
@@ -22,8 +44,18 @@
                 <label for="">Insertar tipo De Usuario</label>
                 <input type="text" name="tipo"><br><br>
                 <input type="submit" value="Guardar">
-            </form>
-        </fieldset>
-    </main>
+        </form>
+    </div>
+
+    <script>
+        var loginDiv = document.getElementById('login');
+        var signupDiv = document.getElementById('signup');
+        
+        document.getElementById('register-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            loginDiv.style.display = 'none';
+            signupDiv.style.display = 'block';
+        });
+    </script>
 </body>
 </html>
