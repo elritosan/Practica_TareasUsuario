@@ -98,6 +98,7 @@
                     <th>idusuario</th>
                     <th>idencuesta</th>
                     <th>estado</th>
+                    <th>disponibilidad</th>
                 </tr>
                 <?php 
                 foreach ($ListaUE as $x) 
@@ -107,6 +108,7 @@
                         <td><?php echo $x->idusuario ?></td>
                         <td><?php echo $Rotulos->RetornarRotulo_Encuesta($x->idencuesta) ?></td>
                         <td><?php echo $x->estado ?></td>
+                        <td><?php echo $x->disponibilidad ?></td>
                     </tr>
                 <?php
                 }

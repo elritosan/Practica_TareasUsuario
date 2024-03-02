@@ -426,4 +426,66 @@ class ClassConsultasBD
 
         return $Lista;
     }
+
+
+    public function ConsultarEncuestaPorIdTarea($IdTarea)
+    {
+        $oConexion = new ClassConexion();
+
+        $SQL = "SELECT * FROM encuesta WHERE idtarea=$IdTarea";
+        $Resultado = $oConexion->Conectar->query($SQL);
+
+        $Lista = array();
+
+        while($Row = $Resultado->fetch_assoc())
+        {
+            $oEncuesta= new ClassENCUESTA();
+
+            $oEncuesta->idencuesta = $Row['idencuesta'];
+            $oEncuesta->descripcion = $Row['descripcion'];
+            $oEncuesta->idtarea = $Row['idtarea'];
+
+            $Lista[] = $oEncuesta;
+        }
+
+        $Resultado->close();
+        $oConexion->CerrarConexion();
+
+        return $Lista;
+    }
+
+    public function ConsultarUsuario_EncuestaPorIdUsuarioIdTarea($IdUsuario, $IdTarea)
+    {
+        $oConexion = new ClassConexion();
+
+        $SQL = "SELECT UE.* FROM usuario AS U 
+        INNER JOIN usuarioencuesta AS UE 
+        ON U.idusuario=UE.idusuario 
+        INNER JOIN encuesta AS E 
+        ON UE.idencuesta = E.idencuesta
+        INNER JOIN tarea AS T
+        ON E.idtarea = T.idtarea
+        WHERE U.idusuario=$IdUsuario AND T.idtarea=$IdTarea";
+        $Resultado = $oConexion->Conectar->query($SQL);
+
+        $Lista = array();
+
+        while($Row = $Resultado->fetch_assoc())
+        {
+            $oUsuario_Encuesta= new ClassUSUARIO_ENCUESTA();
+
+            $oUsuario_Encuesta->idusuario = $Row['idusuario'];
+            $oUsuario_Encuesta->idencuesta = $Row['idencuesta'];
+            $oUsuario_Encuesta->estado = $Row['estado'];
+            $oUsuario_Encuesta->disponibilidad = $Row['disponibilidad'];
+
+            $Lista[] = $oUsuario_Encuesta;
+        }
+
+        $Resultado->close();
+        $oConexion->CerrarConexion();
+
+        return $Lista;
+    }
+
 }
