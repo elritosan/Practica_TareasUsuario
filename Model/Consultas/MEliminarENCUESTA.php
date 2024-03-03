@@ -6,4 +6,4 @@ $oBD = new ClassConsultasBD();
 
 $oBD->EliminarEncuesta($_GET['Id']);
 
-header("Location: ../../Index.html");
+header("Location: ../../View/IndexA.html");

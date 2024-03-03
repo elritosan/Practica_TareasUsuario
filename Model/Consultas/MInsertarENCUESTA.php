@@ -11,4 +11,4 @@ $oEncuesta->idtarea = $_POST['idtarea'];
 
 $oBD->InsertarEncuesta($oEncuesta);
 
-header("Location: ../../Index.html");
+header("Location: ../../View/VInsertarENCUESTA.php");

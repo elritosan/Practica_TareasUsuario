@@ -1,31 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-
-</head>
-<body>
-
-</body>
-</html>
-
-
-<!-- pagina de inicio administrador del negocio, distinto al de cliente -->
-<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pruebas Model</title>
     <?php 
     include_once(__DIR__.'/../ClassConsultasBD.php');
     include_once(__DIR__.'/../../Script/Func/ClassRotulosEntidades.php');
 
     $oBD = new ClassConsultasBD();
-
-    $ListaE = $oBD->BuscarEncuesta($_GET['Id']);
+    $ListaE = $oBD->ConsultarEncuesta();
+ 
 
     $Rotulos = new ClassRotulosEntidades();
     ?>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
     margin: 0;
@@ -35,14 +24,14 @@
     text-transform: capitalize;
     text-decoration: none;
 }
-
     body {
-        min-height: 100vh;
-        background-color: darkcyan;
-        background-size: cover;
-        background-position: center;
-        margin: 0;
-    }
+    min-height: 100vh;
+    background-color: darkcyan;
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+}
+
 .dashboard {
     position: fixed;
     top: 0;
@@ -112,54 +101,64 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Estilo para el fondo blanco de la tabla */
+table {
+    background-color: #fff;
+    width: 80%; /* Ancho de la tabla reducido */
+    margin: 20px auto; /* Margen superior y inferior */
+    border-collapse: collapse;
+}
+
+/* Estilo para las celdas de la tabla */
+table th,
+table td {
+    padding: 10px;
+    border: 1px solid tomato; /* Bordes de la tabla en color tomate */
+}
+
+/* Estilo para mover la tabla hacia la derecha */
+main {
+    margin-left: 280px; /* Ajustar según sea necesario */
+}
+
     </style>
 </head>
 
 <body>
 <main>
         <center>
-            <h1>Consultar Usuario</h1>
-            <form action="../Consultas/MActualizarENCUESTA.php" method="post">
-                <table border="1">
+        <h1>Consultar Encuesta</h1>
+            <table border="1">
+                <tr>
+                    <th>idencuesta</th>
+                    <th>descripcion</th>
+                    <th>idtarea</th>
+                    <th>Acciones</th> <!-- Columna para los iconos de acción -->
+                </tr>
+                <?php 
+                foreach ($ListaE as $x) 
+                {
+                ?>
                     <tr>
-                        <th>idencuesta</th>
-                        <th>descripcion</th>
-                        <th>idtarea</th>
+                        <td><?php echo $x->idencuesta ?></td>
+                        <td><?php echo $x->descripcion ?></td>
+                        <td><?php echo $Rotulos->RetornarRotulo_Tarea($x->idtarea) ?></td>
+                        <!-- Columna para los iconos de acción -->
+                        <td>
+                            <!-- Icono de eliminar con enlace -->
+                            <a href="../Model/Consultas/MEliminarENCUESTA.php?Id=<?php echo $x->idencuesta ?>"><i class="fas fa-trash-alt"></i></a>
+                            <!-- Icono de editar con enlace -->
+                            <a href="../Model/Consultas/MEditarENCUESTA.php?Id=<?php echo $x->idencuesta ?>"><i class="fas fa-edit"></i></a>
+                        </td>
                     </tr>
-                    <?php 
-                    foreach ($ListaE as $x) 
-                    {
-                    ?>
-                        <tr>
-                            <td><input type="text" name="idencuesta" value="<?php echo $x->idencuesta ?>" readonly></td>
-                            <td><input type="text" name="descripcion" value="<?php echo $x->descripcion ?>"></td>
-                            <td>
-                                <select name="idtarea">
-                                    <option value="<?php echo $x->idtarea ?>" select><?php echo $Rotulos->RetornarRotulo_Tarea($x->idtarea) ?></option>
-                                    <?php 
-                                    $ListaT = $oBD->ConsultarTarea();
-                                    foreach ($ListaT as $y) 
-                                    {
-                                        if ($x->idtarea != $y->idtarea) 
-                                        {
-                                    ?>
-                                            <option value="<?php echo $y->idtarea ?>"><?php echo $y->titulo ?></option>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                            </td>
-                        </tr>
-                    <?php
-                    }
-                    ?>
-                </table>
-                <input type="submit" value="Guardar">
-            </form>
+                <?php
+                }
+                ?>
+            </table>
+
         </center>
     </main>
-       
+    
 <div class="dashboard">
     <div class="logo">ADMINISTRADOR</div>
     <nav class="navbar">

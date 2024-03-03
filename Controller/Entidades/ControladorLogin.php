@@ -1,37 +1,31 @@
 <?php
-include("../../Config/ClassConexion.php");
+session_start();
+include_once(__DIR__.'/../../Model/ClassConsultasBD.php');
+$oBD = new ClassConsultasBD();
 
-// Crear una instancia de la clase ClassConexion para establecer la conexión
-$conexion = new ClassConexion();
+if(isset($_POST['correo']) && isset($_POST['clave'])) {
+    $correoElectronico = $_POST['correo'];
+    $clave = $_POST['clave'];
 
-$nombre = $_POST['nombre'];
-$clave = $_POST['clave'];
+    $usu = $oBD->ValidarUsuario($correoElectronico,$clave);
 
-$sql = "SELECT * FROM usuario WHERE nombre = ?";
-$stmt = mysqli_prepare($conexion->Conectar, $sql); // Accede a la conexión a través de la instancia de ClassConexion
-mysqli_stmt_bind_param($stmt, 's', $nombre);
-mysqli_stmt_execute($stmt);
-$result = mysqli_stmt_get_result($stmt);
+    $usuarioValidado = $usu[0];
 
-if ($result->num_rows > 0) {
-    $row = mysqli_fetch_assoc($result);
-    if ($clave === $row['clave']) { // Comparar la contraseña ingresada con la contraseña almacenada en texto plano
-        // Verificar si el usuario es administrador
-        if ($nombre == 'Admin') {
-            header("Location: ../../View/IndexA.php");
-            exit;
-        } else {
-            // Redirigir a la página principal del usuario normal
+    if ($usuarioValidado) {
+        $_SESSION['usuario'] = $usuarioValidado; // Guardar información del usuario en la sesión
+        $tipoUsuario = $usuarioValidado->tipo;
+        if ($tipoUsuario === "cliente") {
             header("Location: ../../View/IndexC.php");
-            exit;
+            exit();
+        } elseif ($tipoUsuario === "administrador") {
+            header("Location: ../../View/IndexA.php");
+            exit();
+        } else {
+            echo "Usuario o contraseña incorrectos.";
         }
     } else {
-        echo "Contraseña incorrecta";
+        echo "Usuario o contraseña incorrectos.";
     }
 } else {
-    echo "Usuario no encontrado";
+    echo "Correo electrónico o contraseña no proporcionados.";
 }
-
-mysqli_stmt_close($stmt);
-$conexion->CerrarConexion(); // Utiliza el método CerrarConexion de la clase ClassConexion para cerrar la conexión
-?>

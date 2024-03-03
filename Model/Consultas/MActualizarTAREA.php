@@ -11,4 +11,4 @@ $oTarea->titulo = $_POST['titulo'];
 
 $oBD->ActualizarTarea($oTarea);
 
-header("Location: ../../Index.html");
+header("Location: ../../View/IndexA.php");

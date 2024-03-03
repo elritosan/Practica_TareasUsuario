@@ -6,4 +6,4 @@ $oBD = new ClassConsultasBD();
 
 $oBD->EliminarTarea($_GET['Id']);
 
-header("Location: ../../Index.html");
+header("Location: ../../View/IndexA.html");

@@ -15,13 +15,15 @@
     text-decoration: none;
 }
 
-body {
-    min-height: 100vh;
-    background: url(../img/Fondo.jpeg) no-repeat;
-    background-size: cover;
-    background-position: center;
-    margin: 0;
-}
+        body {
+            margin: 0;
+            display: flex;
+            background-color: darkcyan;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column; /* Añadido para centrar el título */
+        }
 
 .dashboard {
     position: fixed;
@@ -105,8 +107,9 @@ body {
                 <a href="#">GESTION DE TAREAS </a>
                 <ul class="submenu">
                     <li><a href="../Controller/Controlador.php?Opcion=2"class="btn btn-primary py-2 px-4 rounded-0">INSERTAR TAREA</a></li>
+                    <li><a href="../Controller/Controlador.php?Opcion=4"class="btn btn-primary py-2 px-4 rounded-0">EDITAR TAREA</a></li>
                     <li><a href="../Controller/Controlador.php?Opcion=3"class="btn btn-primary py-2 px-4 rounded-0">INSERTAR ENCUESTA</a></li>
-                    <li><a href="../Controller/Controlador.php?Opcion="class="btn btn-primary py-2 px-4 rounded-0">EDITAR ENCUESTA</a></li>
+                    <li><a href="../Controller/Controlador.php?Opcion=5"class="btn btn-primary py-2 px-4 rounded-0">EDITAR ENCUESTA</a></li>
                 </ul>
             </li>
                 
@@ -119,7 +122,7 @@ body {
                     <li><a href="#">GENERAR REPORTE </a></li>
                 </ul>
             </li>
-            <li> <a href="../Index.html">SALIR</a></li>
+            <li> <a href="../Controller/Entidades/CerrarLogin.php">SALIR</a></li>
         </ul>
     </nav>
 </div>
@@ -128,3 +131,6 @@ body {
 
 </body>
 </html>
+
+
+

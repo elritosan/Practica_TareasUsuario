@@ -10,4 +10,4 @@ $oTarea->titulo = $_POST['titulo'];
 
 $oBD->InsertarTarea($oTarea);
 
-header("Location: ../../Index.html");
+header("Location: ../../View/IndexA.php");

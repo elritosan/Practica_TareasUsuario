@@ -12,4 +12,4 @@ $oEncuesta->idtarea = $_POST['idtarea'];
 
 $oBD->ActualizarEncuesta($oEncuesta);
 
-header("Location: ../../Index.html");
+header("Location: ../../View/IndexA.php");

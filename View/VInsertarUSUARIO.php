@@ -14,13 +14,13 @@
         
         <form action="../Controller/Entidades/ControladorLogin.php" method="post">
             <div class="field-wrap">
-                <label for="">Insertar nombre De Usuario</label>    
-                <input type="text" name="nombre"><br><br>
+                <label for="">Insertar su correo electronico</label>    
+                <input type="email" name="correo"><br><br>
             </div>
         
             <div class="field-wrap">
              <label for="">Insertar clave De Usuario</label>
-                <input type="text" name="clave"><br><br>
+                <input type="password" name="clave"><br><br>
             </div>
         
             <input type="submit" class="button" value="Iniciar Sesión">
@@ -38,11 +38,10 @@
                 <label for="">Insertar nombre De Usuario</label>    
                 <input type="text" name="nombre"><br><br>
                 <label for="">Insertar correo De Usuario</label>
-                <input type="text" name="correo"><br><br>
+                <input type="email" name="correo"><br><br>
                 <label for="">Insertar clave De Usuario</label>
                 <input type="text" name="clave"><br><br>
-                <label for="">Insertar tipo De Usuario</label>
-                <input type="text" name="tipo"><br><br>
+                <input type="text" name="tipo" value="cliente" style="display:none">
                 <input type="submit" value="Guardar">
         </form>
     </div>
