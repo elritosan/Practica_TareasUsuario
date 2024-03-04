@@ -39,7 +39,7 @@ BEGIN
     
     -- Asignar todas las encuestas disponibles al nuevo usuario
     INSERT INTO usuarioencuesta (idusuario, idencuesta, estado, disponibilidad)
-    SELECT v_idUsuario, idencuesta, 'pendiente', '1' FROM encuesta;
+    SELECT v_idUsuario, idencuesta, 'pendiente', '0' FROM encuesta;
 END //
 
 DELIMITER ;
