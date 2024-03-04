@@ -91,17 +91,19 @@
                             <?php $oListaUE = $oBD->ConsultarUsuario_EncuestaPorIdUsuarioIdTarea($IdUsuario,$tarea->idtarea) ?>
                             <?php foreach ($oListaUE as $x): ?>
                                 <?php 
-                                $estado = $x->estado;
-                                $boton_texto = ($estado == 'pendiente') ? 'Pendiente' : 'Completado';
-                                $boton_clase = ($estado == 'pendiente') ? 'btn-pendiente' : 'btn-completado';
-                                
-                                $Rotulos = new ClassRotulosEntidades();
+                               if ($x->disponibilidad == '1') {
+                                    $estado = $x->estado;
+                                    $boton_texto = ($estado == 'pendiente') ? 'Pendiente' : 'Completado';
+                                    $boton_clase = ($estado == 'pendiente') ? 'btn-pendiente' : 'btn-completado';
+                                    
+                                    $Rotulos = new ClassRotulosEntidades();
 
-                                echo "<tr>";
-                                echo "<td>{$tarea->titulo}</td>";
-                                echo "<td>{$Rotulos->RetornarRotulo_Encuesta($x->idencuesta)}</td>";
-                                echo "<td><button id='{$x->idencuesta}' name='{$x->estado}' title='{$x->disponibilidad}' class='btn $boton_clase' onclick=\"marcarEncuesta({$IdUsuario},{$tarea->idtarea},this)\">$boton_texto</button></td>";
-                                echo "</tr>";
+                                    echo "<tr>";
+                                    echo "<td>{$tarea->titulo}</td>";
+                                    echo "<td>{$Rotulos->RetornarRotulo_Encuesta($x->idencuesta)}</td>";
+                                    echo "<td><button id='{$x->idencuesta}' name='{$x->estado}' title='{$x->disponibilidad}' class='btn $boton_clase' onclick=\"marcarEncuesta({$IdUsuario},{$tarea->idtarea},this)\">$boton_texto</button></td>";
+                                    echo "</tr>";
+                                }
                                 ?>
                             <?php endforeach; ?>
                         </tbody>

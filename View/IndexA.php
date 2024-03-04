@@ -116,10 +116,7 @@
             <li class="dashboard-item">
                 <a href="#">REPORTES </a>
                 <ul class="submenu">
-                    <li><a href="#">GENERAR REPORTE </a></li>
-                    <li><a href="#">GENERAR REPORTE </a></li>
-                    <li><a href="#">GENERAR REPORTE </a></li>
-                    <li><a href="#">GENERAR REPORTE </a></li>
+                    <li><a href="../Controller/Controlador.php?Opcion=8"class="btn btn-primary py-2 px-4 rounded-0">GENERAR REPORTE DE ENCUESTAS </a></li>
                 </ul>
             </li>
             <li> <a href="../Controller/Entidades/CerrarLogin.php">SALIR</a></li>

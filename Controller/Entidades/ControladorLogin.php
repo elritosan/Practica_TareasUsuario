@@ -7,11 +7,16 @@ if(isset($_POST['correo']) && isset($_POST['clave'])) {
     $correoElectronico = $_POST['correo'];
     $clave = $_POST['clave'];
 
+    // Verificar si el correo está registrado
+    $correoRegistrado = $oBD->ValidarUsuario($correoElectronico, $clave);
+
+  
+
+    // Validar al usuario
     $usu = $oBD->ValidarUsuario($correoElectronico,$clave);
 
-    $usuarioValidado = $usu[0];
-
-    if ($usuarioValidado) {
+    if (count($usu) == 1) {
+        $usuarioValidado = $usu[0];
         $_SESSION['usuario'] = $usuarioValidado; // Guardar información del usuario en la sesión
         $tipoUsuario = $usuarioValidado->tipo;
         if ($tipoUsuario === "cliente") {
@@ -29,3 +34,4 @@ if(isset($_POST['correo']) && isset($_POST['clave'])) {
 } else {
     echo "Correo electrónico o contraseña no proporcionados.";
 }
+?>
