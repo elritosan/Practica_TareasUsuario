@@ -6,7 +6,7 @@ include_once(__DIR__.'../../Script/Func/ClassRotulosEntidades.php');
 
 session_start(); // Iniciar la sesión si no está iniciada
 if (!isset($_SESSION['usuario'])) {
-    include_once(__DIR__.'/../Controller/Entidades/ControladorLogin.php');
+    include_once(__DIR__.'../Controller/Entidades/ControladorLogin.php');
     exit();
 }
 $usuario = $_SESSION['usuario'];
@@ -30,11 +30,34 @@ $ListaTareas = $oBD->ConsultarTarea();
 
     <style>
         .container-tareas {
-            margin-top: 110px; /* Espacio adicional entre el menú y el contenido */
+            margin-top: 150px; /* Reducido el margen superior */
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%; /* Mantenida la anchura al 50% */
         }
 
-        .expandir-btn {
+        .container-tareas table {
+            width: 100%;
+            text-align: center;
+            border: 2px solid tomato; /* Cambio del color de los bordes a tomate */
+            background-color: white; /* Cambio del fondo a blanco */
+        }
+
+        .container-tareas th, .container-tareas td {
+            padding: 10px;
+            border: 1px solid tomato; /* Cambio del color de los bordes a tomate */
+        }
+
+        .container-tareas .expandir-btn {
             cursor: pointer;
+        }
+
+        /* Estilos para el icono de más */
+        .expandir-btn {
+            font-size: 24px; /* Tamaño grande del icono */
+            color: #337ab7; /* Color azul */
+            display: block;
+            margin: 0 auto; /* Centrado horizontal */
         }
 
         /* Estilos para la ventana modal */
@@ -56,9 +79,10 @@ $ListaTareas = $oBD->ConsultarTarea();
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
+            position: relative;
         }
 
-        .modal-header, .modal-body {
+        .modal-header, .modal-body, .modal-footer {
             padding: 10px 0;
         }
 
@@ -97,12 +121,18 @@ $ListaTareas = $oBD->ConsultarTarea();
         .encuestas-table th, .encuestas-table td {
             border: 1px solid #dddddd;
             text-align: left;
-            padding: 8px;
+            padding: 12px; /* Aumenta el padding para hacer los checkbox más grandes */
         }
 
         .encuestas-table th {
             background-color: #f2f2f2;
         }
+            /* Estilos para aumentar el tamaño del checkbox */
+    .encuestas-table input[type="checkbox"] {
+        transform: scale(1.5); /* Aumenta el tamaño del checkbox */
+        margin: 0; /* Elimina el margen para que el checkbox esté centrado verticalmente */
+        cursor: pointer; /* Cambia el cursor al pasar sobre el checkbox */
+    }
 
         /* Estilos para la columna de selección */
         .seleccion-column {
@@ -112,13 +142,15 @@ $ListaTareas = $oBD->ConsultarTarea();
 
         /* Estilos para el botón de guardar */
         .guardar-btn {
-            padding: 5px 10px;
+            padding: 10px 20px; /* Aumenta el padding para hacer el botón más grande */
             background-color: #337ab7; /* Color azul */
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            float: right;
+            position: absolute;
+            bottom: 10px; /* Ajusta la distancia desde la parte inferior */
+            right: 20px; /* Ajusta la posición horizontal */
         }
 
         .guardar-btn:hover {
@@ -137,6 +169,8 @@ $ListaTareas = $oBD->ConsultarTarea();
             </div>
             <nav class="menu">
                 <!-- Iconos para los elementos del menú -->
+                <a href="../Controller/Controlador.php?Opcion=6" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block"><i class="fas fa-tasks"></i> Completar Tareas</a>
+
                 <a href="../Controller/Entidades/CerrarLogin.php" class="btn btn-primary py-4 px-lg-4 rounded-0 d-none d-lg-block"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                 </a>
 
@@ -162,7 +196,8 @@ $ListaTareas = $oBD->ConsultarTarea();
                     <tr>
                         <td><?php echo $tarea->titulo; ?></td>
                         <td>
-                            <button class="expandir-btn" onclick="openModal(<?php echo $tarea->idtarea; ?>)">+</button>
+                            <!-- Icono para expandir -->
+                            <i class="fas fa-plus-circle expandir-btn" onclick="openModal(<?php echo $tarea->idtarea; ?>)"></i>
                             <!-- Ventana modal para mostrar las encuestas asociadas a la tarea -->
                             <div id="modal-<?php echo $tarea->idtarea; ?>" class="modal">
                                 <div class="modal-content">
@@ -197,6 +232,9 @@ $ListaTareas = $oBD->ConsultarTarea();
                                             </tbody>
                                         </table>
                                         <!-- Botón Guardar dentro de la modal -->
+                                    </div>
+                                    <!-- Contenedor del botón Guardar -->
+                                    <div class="modal-footer">
                                         <button class="guardar-btn" onclick="guardar(<?php echo $IdUsuario ?>,<?php echo $tarea->idtarea ?>)">Guardar</button>
                                     </div>
                                 </div>

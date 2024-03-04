@@ -9,5 +9,7 @@ switch ($Opcion) {
     case 3: include_once(__DIR__. '/../View/VInsertarENCUESTA.php'); break;
     case 4: include_once(__DIR__. '/../View/Tarea.php'); break;
     case 5: include_once(__DIR__. '/../View/Encuesta.php'); break;
+    case 6: include_once(__DIR__. '/../View/IndexC_Completar.php'); break;
+    case 7: include_once(__DIR__. '/../View/IndexC.php'); break;
     default: echo "Opción No Válida"; break;
 }
