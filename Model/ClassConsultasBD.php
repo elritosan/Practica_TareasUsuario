@@ -331,7 +331,7 @@ class ClassConsultasBD
     {
         $oConexion = new ClassConexion();
 
-        $SQL = "UPDATE encuesta SET estado=?, disponibilidad=? WHERE idusuario=? AND idencuesta=?";
+        $SQL = "UPDATE usuarioencuesta SET estado=?, disponibilidad=? WHERE idusuario=? AND idencuesta=?";
         $Sentencia = $oConexion->Conectar->prepare($SQL);
 
         $Sentencia->bind_param(
@@ -488,4 +488,30 @@ class ClassConsultasBD
         return $Lista;
     }
 
+    public function BuscarUsuarioEncuesta($IdUsuario, $IdEncuesta)
+    {
+        $oConexion = new ClassConexion();
+
+        $SQL = "SELECT UE.* FROM usuarioencuesta AS UE WHERE UE.idusuario={$IdUsuario} AND UE.idencuesta={$IdEncuesta}";
+        $Resultado = $oConexion->Conectar->query($SQL);
+
+        $Lista = array();
+
+        while($Row = $Resultado->fetch_assoc())
+        {
+            $oUsuario_Encuesta= new ClassUSUARIO_ENCUESTA();
+
+            $oUsuario_Encuesta->idusuario = $Row['idusuario'];
+            $oUsuario_Encuesta->idencuesta = $Row['idencuesta'];
+            $oUsuario_Encuesta->estado = $Row['estado'];
+            $oUsuario_Encuesta->disponibilidad = $Row['disponibilidad'];
+
+            $Lista[] = $oUsuario_Encuesta;
+        }
+
+        $Resultado->close();
+        $oConexion->CerrarConexion();
+
+        return $Lista;
+    }
 }
